@@ -2,7 +2,6 @@ import './style.css';
 import { LiveLeaderboard } from './live-leaderboard-clean';
 import { LocationService, HopCatConfig, LeaderboardData } from './types';
 import { audioManager } from './audio';
-import { config } from './config';
 import { 
   formatNumber, 
   getMedal, 
@@ -27,7 +26,6 @@ class HopCat {
   
   // DOM elements
   private catElement!: HTMLElement;
-  private catImage!: HTMLImageElement;
   private hopCountElement!: HTMLElement;
   private hopsPerSecondElement!: HTMLElement;
   private worldwideHopsElement!: HTMLElement;
@@ -45,7 +43,6 @@ class HopCat {
 
   private initializeElements(): void {
     this.catElement = document.getElementById('cat')!;
-    this.catImage = document.getElementById('catImage') as HTMLImageElement;
     this.hopCountElement = document.getElementById('hopCount')!;
     this.hopsPerSecondElement = document.getElementById('hopsPerSecond')!;
     this.worldwideHopsElement = document.getElementById('worldwideHops')!;

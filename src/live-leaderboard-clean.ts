@@ -5,7 +5,7 @@ class LiveLeaderboard implements LiveLeaderboardInterface {
   public isConnected = false;
   private onUpdateCallback: ((data: LeaderboardData) => void) | null = null;
   private debouncedAddHop: (country: string) => void;
-  private pollInterval: number | null = null;
+  private pollInterval: NodeJS.Timeout | null = null;
 
   constructor() {
     this.debouncedAddHop = debounce(this.addHopInternal.bind(this), 500);
@@ -28,18 +28,6 @@ class LiveLeaderboard implements LiveLeaderboardInterface {
         this.onUpdateCallback(localData);
       }
     }, 10000);
-  }
-
-  private simulateGlobalActivity(data: LeaderboardData): void {
-    const countries = Object.keys(data);
-    if (countries.length > 0) {
-      // Randomly add hops to some countries
-      for (let i = 0; i < Math.random() * 3; i++) {
-        const randomCountry = countries[Math.floor(Math.random() * countries.length)];
-        data[randomCountry].hops += Math.floor(Math.random() * 5) + 1;
-      }
-      localStorage.setItem('hopcatGlobalLeaderboard', JSON.stringify(data));
-    }
   }
 
   showConnectionStatus(status: string, message: string): void {
