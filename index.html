@@ -34,23 +34,7 @@
                 </div>
             </div>
         </main>
-
-        <!-- Leaderboard -->
-        <section class="leaderboard glass rounded-3xl p-8 shadow-2xl border border-white border-opacity-20 animate-fade-in-up mb-16">
-            <h2 class="leaderboard-title text-center text-3xl mb-6 font-semibold">🏆 Country Leaderboard</h2>
-            <div class="leaderboard-container max-h-96 overflow-y-auto custom-scrollbar">
-                <div class="leaderboard-item worldwide glass rounded-xl p-4 mb-3 border-2 border-gold border-opacity-40 bg-gold bg-opacity-20 font-semibold text-lg">
-                    <div class="flex items-center">
-                        <span class="rank min-w-10 text-center">🌍</span>
-                        <span class="country flex-1 pl-4">Worldwide</span>
-                        <span class="hops text-gold" id="worldwideHops">0</span>
-                    </div>
-                </div>
-                <div id="countryLeaderboard"></div>
-            </div>
-        </section>
-
-        <!-- Community Section -->
+                <!-- Community Section -->
         <section class="text-center mb-16">
             <div class="glass rounded-2xl p-6 border border-white border-opacity-20">
                 <h3 class="text-xl font-semibold mb-4 text-gold">🚀 Join the Community</h3>
@@ -71,6 +55,21 @@
                 <div class="flex justify-center gap-4 flex-wrap" id="socialLinks">
                     <!-- Links will be populated by JavaScript -->
                 </div>
+            </div>
+        </section>
+
+        <!-- Leaderboard -->
+        <section class="leaderboard glass rounded-3xl p-8 shadow-2xl border border-white border-opacity-20 animate-fade-in-up mb-16">
+            <h2 class="leaderboard-title text-center text-3xl mb-6 font-semibold">🏆 Country Leaderboard</h2>
+            <div class="leaderboard-container max-h-96 overflow-y-auto custom-scrollbar">
+                <div class="leaderboard-item worldwide glass rounded-xl p-4 mb-3 border-2 border-gold border-opacity-40 bg-gold bg-opacity-20 font-semibold text-lg">
+                    <div class="flex items-center">
+                        <span class="rank min-w-10 text-center">🌍</span>
+                        <span class="country flex-1 pl-4">Worldwide</span>
+                        <span class="hops text-gold" id="worldwideHops">0</span>
+                    </div>
+                </div>
+                <div id="countryLeaderboard"></div>
             </div>
         </section>
     </div>
