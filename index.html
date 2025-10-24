@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$HOPCAT - Click to make the cat hop!</title>
+    <link rel="icon" type="image/svg+xml" href="/hopcat.png" />
+</head>
+<body class="gradient-primary min-h-screen text-white overflow-x-hidden">
+    <div class="container mx-auto max-w-6xl px-5 py-5">
+        <!-- Header -->
+        <header class="text-center mb-10 animate-fade-in-down">
+            <h1 class="text-6xl md:text-7xl font-bold mb-3 text-shadow-lg tracking-wider">$HOPCAT</h1>
+            <p class="text-xl opacity-90 font-medium">Click the cat to make it hop!</p>
+        </header>
+
+        <!-- Main Cat Section -->
+        <main class="text-center mb-16">
+            <div class="cat-container mb-8 h-80 flex items-end justify-center relative">
+                <div class="cat cursor-pointer transition-transform duration-100 ease-out hover:scale-105 active:scale-95 select-none" id="cat">
+                    <img src="/hopcat.png" alt="Hopcat" id="catImage" draggable="false" 
+                         class="w-52 h-52 object-contain transition-transform duration-100">
+                </div>
+            </div>
+            
+            <!-- Counter -->
+            <div class="counter-section mb-10">
+                <div class="counter flex flex-col items-center mb-4">
+                    <span class="counter-number text-6xl font-bold text-white text-shadow-lg transition-transform duration-200" id="hopCount">0</span>
+                    <span class="counter-label text-xl font-medium opacity-80 tracking-widest">HOPS</span>
+                </div>
+                <div class="rate text-lg opacity-70 font-normal">
+                    <span id="hopsPerSecond">0</span> HPS (Hops Per Second)
+                </div>
+            </div>
+        </main>
+
+        <!-- Leaderboard -->
+        <section class="leaderboard glass rounded-3xl p-8 shadow-2xl border border-white border-opacity-20 animate-fade-in-up mb-16">
+            <h2 class="leaderboard-title text-center text-3xl mb-6 font-semibold">🏆 Country Leaderboard</h2>
+            <div class="leaderboard-container max-h-96 overflow-y-auto custom-scrollbar">
+                <div class="leaderboard-item worldwide glass rounded-xl p-4 mb-3 border-2 border-gold border-opacity-40 bg-gold bg-opacity-20 font-semibold text-lg">
+                    <div class="flex items-center">
+                        <span class="rank min-w-10 text-center">🌍</span>
+                        <span class="country flex-1 pl-4">Worldwide</span>
+                        <span class="hops text-gold" id="worldwideHops">0</span>
+                    </div>
+                </div>
+                <div id="countryLeaderboard"></div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section class="text-center mb-16">
+            <div class="glass rounded-2xl p-6 border border-white border-opacity-20">
+                <h3 class="text-xl font-semibold mb-4 text-gold">🚀 Join the Community</h3>
+                
+                <!-- Contract Address -->
+                <div class="mb-4">
+                    <p class="text-sm opacity-80 mb-2">Contract Address:</p>
+                    <div class="flex items-center justify-center gap-2 bg-black bg-opacity-30 rounded-lg p-3">
+                        <span class="font-mono text-sm break-all" id="contractAddress">Loading...</span>
+                        <button onclick="copyContractAddress()" 
+                                class="ml-2 px-3 py-1 bg-gold bg-opacity-20 hover:bg-opacity-40 rounded text-xs transition-all duration-200">
+                            📋 Copy
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex justify-center gap-4 flex-wrap" id="socialLinks">
+                    <!-- Links will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Proper Footer -->
+    <footer class="bg-black bg-opacity-20 border-t border-white border-opacity-10 mt-auto">
+        <div class="container mx-auto max-w-6xl px-5 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <!-- Left Side - Branding -->
+                <div class="text-center md:text-left">
+                    <h4 class="text-lg font-bold text-gold mb-1">$HOPCAT</h4>
+                    <p class="text-sm opacity-70">Click to make the cat hop!</p>
+                </div>
+
+                <!-- Center - Links -->
+                <div class="flex gap-6 flex-wrap justify-center" id="footerLinks">
+                    <!-- Links will be populated by JavaScript -->
+                </div>
+
+                <!-- Right Side - Copyright -->
+                <div class="text-center md:text-right">
+                    <p class="text-xs opacity-60">© 2025 HOPCAT</p>
+                    <p class="text-xs opacity-60">Made with ❤️ for the community</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+
+    <script type="module">
+        import { config } from '/src/config.ts';
+
+        // Initialize the page with environment variables
+        function initializePage() {
+            // Set contract address
+            const contractElement = document.getElementById('contractAddress');
+            if (contractElement) {
+                contractElement.textContent = config.contractAddress;
+            }
+
+            // Create social links
+            const socialLinksContainer = document.getElementById('socialLinks');
+            if (socialLinksContainer) {
+                socialLinksContainer.innerHTML = `
+                    <a href="${config.urls.xCommunity}" target="_blank" 
+                       class="flex items-center gap-2 glass px-4 py-2 rounded-xl hover:bg-white hover:bg-opacity-20 transition-all duration-200 border border-white border-opacity-30">
+                        <span>🐦</span>
+                        <span class="text-sm">X Community</span>
+                    </a>
+                    <a href="${config.urls.tiktok}" target="_blank" 
+                       class="flex items-center gap-2 glass px-4 py-2 rounded-xl hover:bg-white hover:bg-opacity-20 transition-all duration-200 border border-white border-opacity-30">
+                        <span>🎵</span>
+                        <span class="text-sm">TikTok</span>
+                    </a>
+                `;
+            }
+
+            // Create footer links
+            const footerLinksContainer = document.getElementById('footerLinks');
+            if (footerLinksContainer) {
+                footerLinksContainer.innerHTML = `
+                    <a href="${config.urls.github}" target="_blank" 
+                       class="flex items-center gap-2 hover:text-gold transition-colors duration-200">
+                        <span>⭐</span>
+                        <span class="text-sm">GitHub</span>
+                    </a>
+                    <a href="${config.urls.developer}" target="_blank" 
+                       class="flex items-center gap-2 hover:text-gold transition-colors duration-200">
+                        <span>👨‍💻</span>
+                        <span class="text-sm">Developer</span>
+                    </a>
+                `;
+            }
+        }
+
+        // Copy contract address to clipboard
+        window.copyContractAddress = function() {
+            copyToClipboard(config.contractAddress);
+        };
+
+        // Copy to clipboard function
+        window.copyToClipboard = function(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show success feedback
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✅ Copied!';
+                button.style.backgroundColor = 'rgba(34, 197, 94, 0.3)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.backgroundColor = '';
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✅ Copied!';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        };
+
+        // Initialize when DOM is loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePage);
+        } else {
+            initializePage();
+        }
+    </script>
+</body>
+</html>
